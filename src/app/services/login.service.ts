@@ -38,6 +38,5 @@ export class LoginService {
   logout(): void {
     this.storageService.clear("TOKEN");
     this.storageService.clear("USERNAME");
-
   }
 }

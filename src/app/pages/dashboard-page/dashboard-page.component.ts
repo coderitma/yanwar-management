@@ -9,27 +9,27 @@ export class DashboardPageComponent implements OnInit {
   daftarFitur: any = [
     {
       "title": "Product Management",
-      "image": "https://picsum.photos/200/90?random=1",
+      "image": "https://picsum.photos/800/500?random=1",
       "link": "/product"
     },
     {
       "title": "User Management",
-      "image": "https://picsum.photos/200/90?random=2",
+      "image": "https://picsum.photos/800/500?random=2",
       "link": ""
     },
     {
       "title": "Sales Management",
-      "image": "https://picsum.photos/200/90?random=3",
+      "image": "https://picsum.photos/800/500?random=3",
       "link": ""
     },
     {
       "title": "Task Management",
-      "image": "https://picsum.photos/200/90?random=4",
+      "image": "https://picsum.photos/800/500?random=4",
       "link": ""
     },
     {
       "title": "Content Management",
-      "image": "https://picsum.photos/200/90?random=5",
+      "image": "https://picsum.photos/800/500?random=5",
       "link": ""
     }
   ];

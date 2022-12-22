@@ -7,7 +7,11 @@
           <form [formGroup]="requiredForm" (ngSubmit)="onLogin()">
             <div class="mb-2">
               <label class="form-label">Username</label>
-              <input [(ngModel)]="user.username"  formControlName="username" type="text" class="form-control" />
+              <input 
+                [(ngModel)]="user.username"  
+                formControlName="username" 
+                type="text" 
+                class="form-control" />
               <div
                 *ngIf="requiredForm.controls['username'].invalid 
                   && requiredForm.controls['username'].touched" 
@@ -31,12 +35,16 @@
                 </span>
               </div>
             </div>
-            <div class="mb-2 mt-4">
+            <div *ngIf="!requiredForm.controls['username'].invalid && !requiredForm.controls['password'].invalid" class="mb-2 mt-4">
               <button type="submit" class="btn btn-primary">Sign In</button>
+            </div>
+            <div *ngIf="requiredForm.controls['username'].invalid || requiredForm.controls['password'].invalid" class="mb-2 mt-4">
+              <button type="submit" disabled class="btn btn-dark">Sign In</button>
             </div>
             <p>{{ messageError }}</p>
             <!-- <p>{{ user | json }}</p> -->
-            <!-- <p>{{requiredForm.controls['username'].touched}}</p> -->
+            <!-- <p>{{requiredForm.controls['username'].invalid}}</p>
+            <p>{{requiredForm.controls['password'].invalid}}</p> -->
             <!-- <p>Form value: {{ requiredForm.value | json }}</p>
             <p>Form status: {{ requiredForm.status | json }}</p> -->
           </form>
