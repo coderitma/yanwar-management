@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, resolveForwardRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError } from 'rxjs';
 import { ILogin, ILoginToken } from 'src/app/interfaces/i-login';
 import { LoginService } from 'src/app/services/login.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -12,6 +15,8 @@ import { StorageService } from 'src/app/services/storage.service';
 export class LoginPageComponent implements OnInit {
   lastURL: string | null = null;
   defaultURL: string = "dashboard";
+  requiredForm: FormGroup;
+  messageError: string = "";
 
   user: ILogin = {
     username: "",
@@ -22,8 +27,20 @@ export class LoginPageComponent implements OnInit {
     private loginService: LoginService, 
     private storageService: StorageService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {
+    this.requiredForm = new FormGroup({
+      username: new FormControl(this.user.username,[
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      password: new FormControl(this.user.password,[
+        Validators.required,
+        Validators.minLength(5),
+      ])
+    })
+  }
 
   ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe(
@@ -46,6 +63,11 @@ export class LoginPageComponent implements OnInit {
             this.router.navigate([this.defaultURL]);
           }
           
+        },
+        (error: any) => {
+          console.log(error.message);
+          window.alert(error);
+          this.messageError = "Something when wrong " + error.message;
         }
       )
   }
